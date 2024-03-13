@@ -1,0 +1,15 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - name: Redis Server Setup
+    init: echo 'REDIS SERVER STARTING'
+    command: redis-server --daemonize yes
+  - name: Hidden Environment File Setup
+    init: |
+      cd mob-bot
+      echo "DISCORD_KEY=$DISCORD_TOKEN" > .env
+vscode:
+  extensions:
+    - eamodio.gitlens
+    - GitHub.copilot
+    - joshbolduc.commitlint
