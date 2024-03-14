@@ -1,0 +1,5 @@
+{
+    "watch": ["./index.ts", "actions/**/*.ts","commands/**/*.ts","events/**/*.ts"],
+    "ext": "ts,json",
+    "exec": "node --loader ts-node/esm ./index.ts"
+  }

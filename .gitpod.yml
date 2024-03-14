@@ -4,10 +4,15 @@ tasks:
   - name: Redis Server Setup
     init: echo 'REDIS SERVER STARTING'
     command: redis-server --daemonize yes
+  - name: Npm Install
+    init: |
+      cd src
+      npm install
   - name: Hidden Environment File Setup
     init: |
-      cd mob-bot
-      echo "DISCORD_KEY=$DISCORD_TOKEN" > .env
+      cd src
+      echo "DISCORD_TOKEN=$DISCORD_TOKEN" > .env
+      echo "CLIENT_ID"=$CLIENT_ID >> .env
 vscode:
   extensions:
     - eamodio.gitlens
