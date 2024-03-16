@@ -1,10 +1,10 @@
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
-import eventHandlers from './events/index.js';
+import eventHandlers from './events/index';
 const dotenv = await import('dotenv');
 dotenv.config();
 
 const client = new Client({
-    intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages],
+    intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMessages],
     partials: [Partials.Message]
 });
 

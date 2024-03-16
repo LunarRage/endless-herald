@@ -1,7 +1,7 @@
 // src/redisClient.ts
 
 import { createClient } from 'redis';
-import logger from './logger.js';
+import logger from './logger';
 const dotenv = await import('dotenv');
 dotenv.config();
 
