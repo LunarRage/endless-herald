@@ -1,12 +1,12 @@
 import { Client} from 'discord.js';
-import logger from '../lib/logger';
+import endlessLogger from '../lib/logger';
 import { landQuery } from '../types/apiTypes';
 import { getLandDelegationOrders } from '../API/landDelegation';
 import { RNSInstance } from '../lib/rns';
 
 
 const handleClientReady = async (client: Client) => {
-    logger.info(`Bot is ready! Logged in as ${client.user?.tag}`);
+    endlessLogger.info(`Bot is ready! Logged in as ${client.user?.tag}`);
     let baseURL = `https://land-delegate-api.axieinfinity.com/land/v1/public/contract/marketplace`;
     let query: landQuery = {
         page: 1,
@@ -16,7 +16,7 @@ const handleClientReady = async (client: Client) => {
     }
     let result = await getLandDelegationOrders(baseURL, query);
     let wordResult = await RNSInstance.getAddr('victoria.ron');
-    logger.info(wordResult);
+    endlessLogger.info(wordResult);
 };
 
 export default handleClientReady;

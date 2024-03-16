@@ -1,4 +1,4 @@
-import logger from "../lib/logger";
+import endlessLogger from "../lib/logger";
 import { ApiResponse, LandData, landQuery } from "../types/index";
 
 const baseURL = `https://land-delegate-api.axieinfinity.com/land/v1/public/contract/marketplace`;
@@ -31,7 +31,7 @@ export async function getLandDelegationOrders(baseURL:string, query:landQuery):P
 
         return { data, error:null }
     } catch (error) {
-        logger.info(error,`Error fetching land data`);
+        endlessLogger.info(error,`Error fetching land data`);
         return {
             data:null,
             error:{
