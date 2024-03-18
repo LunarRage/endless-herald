@@ -8,7 +8,6 @@ tasks:
     init: npm install
   - name: Hidden Environment File Setup
     init: |
-      cd src
       echo "DISCORD_TOKEN=$DISCORD_TOKEN" > .env
       echo "CLIENT_ID"=$CLIENT_ID >> .env
       echo "SM_API_KEY"=$SM_API_KEY >> .env

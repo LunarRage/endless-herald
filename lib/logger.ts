@@ -1,20 +1,21 @@
 import { pino, Logger } from 'pino';
 import fs from 'fs';
 import path from 'path';
+require('dotenv').config();
 
 
 
-async function setup(): Promise<Logger>{
+
+function setup():Logger{
     try {
         let logger: Logger;
-        const dotenv = await import('dotenv');
-        dotenv.config();
 
         // Determine the environment
         const environment = process.env.NODE_ENV || 'production';
 
         // Get the directory path of the current module
-        const currentModuleDirectory = path.dirname(new URL(import.meta.url).pathname);
+        console.log(__filename);
+        const currentModuleDirectory = path.dirname(__filename);
 
         // Go up two levels to get to the correct directory
         const parentDirectory = path.dirname(currentModuleDirectory);
@@ -55,5 +56,5 @@ async function setup(): Promise<Logger>{
     }
 }
 
-const endlessLogger = await setup();
+const endlessLogger = setup();
 export default endlessLogger;

@@ -2,7 +2,7 @@ import { Client} from 'discord.js';
 import endlessLogger from '../lib/logger';
 import { landQuery } from '../types/apiTypes';
 import { getLandDelegationOrders } from '../API/landDelegation';
-import { RNSInstance } from '../lib/rns';
+// import { getRNSInstance } from '../lib/rns';
 
 
 const handleClientReady = async (client: Client) => {
@@ -15,8 +15,6 @@ const handleClientReady = async (client: Client) => {
         sort: 'desc'
     }
     let result = await getLandDelegationOrders(baseURL, query);
-    let wordResult = await RNSInstance.getAddr('victoria.ron');
-    endlessLogger.info(wordResult);
 };
 
 export default handleClientReady;
