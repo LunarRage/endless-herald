@@ -1,6 +1,6 @@
 {
   "include": ["./"],
-  "exclude": ["./node_modules","./dist"],
+  "exclude": ["./node_modules","./app"],
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2022",
@@ -8,7 +8,7 @@
     "lib": ["es6"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "resolveJsonModule": true,                        /* Enable importing .json files. */
-    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */// "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
+    "outDir": "./app",                                   /* Specify an output folder for all emitted files. */// "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "strict": true,                                      /* Enable all strict type-checking options. */

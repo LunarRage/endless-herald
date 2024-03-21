@@ -25,7 +25,7 @@ export async function broadcastToAllGuilds(embeds:EmbedBuilder[]){
 }
 
 function chunkEmbeds(embeds:EmbedBuilder[], size:number) {
-    const chunked = [];
+    const chunked= [];
     for (let i = 0; i < embeds.length; i += size) {
         chunked.push(embeds.slice(i, i + size));
     }
