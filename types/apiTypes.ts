@@ -5,13 +5,24 @@ export type landQuery = {
     sort: string;
 }
 
-export type ApiResponse < T > = {
-    data: T | null;
-    error: {
-        message: string;
-        code ? : number;
-    } | null;
+export type LandAPIResponse= {
+    data: LandData[] | null;
+    total: number;
 };
+
+export type RoninUser = {
+    rnsName: string;
+    roninAddress: string;
+}
+
+export type Broadcasted ={
+    id:string;
+    created_at: string | Date;
+}
+
+export type LastBroadcasted = {
+    broadcasted:Broadcasted[];
+}
 
 export type LandData = {
     id: string;

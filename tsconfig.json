@@ -2,9 +2,7 @@
   "include": ["./"],
   "exclude": ["./node_modules","./dist"],
   "compilerOptions": {
-    "module": "nodenext",
-    "baseUrl": "./",
-    "typeRoots": ["./node_modules/@roninnetwork/rnsjs/dist/types/"],
+    "module": "commonjs",
     "target": "es2022",
     "moduleResolution": "node",
     "lib": ["es6"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */

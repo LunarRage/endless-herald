@@ -1,3 +1,2 @@
-import { LandData } from "../types";
 
-// function transformLandDatoForEmbded(landData: LandData):
+export * from './embedBuilder';

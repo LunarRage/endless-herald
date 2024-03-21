@@ -14,7 +14,6 @@ function setup():Logger{
         const environment = process.env.NODE_ENV || 'production';
 
         // Get the directory path of the current module
-        console.log(__filename);
         const currentModuleDirectory = path.dirname(__filename);
 
         // Go up two levels to get to the correct directory

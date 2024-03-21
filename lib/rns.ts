@@ -14,22 +14,8 @@ async function setup():Promise<RNS>{
     return RNSInstance;
 }
 
-
-(async () => {
-    const RNSInstance = await setup();
-
-    const nameToAddress = await RNSInstance.getAddr('jihoz.ron')
-
-    console.log(`jihoz.ron address: ${nameToAddress}`)
-
-    const addressToName = await RNSInstance.getName(nameToAddress)
-
-    console.log(`${nameToAddress} name: ${addressToName!.name}`)
-
-})()
-
-// Export a wrapper function instead of the instance directly
-// export async function getRNSInstance(): Promise<RNS> {
-//     return setup();
-// }
+//Export a wrapper function instead of the instance directly
+export async function getRNSInstance(): Promise<RNS> {
+    return setup();
+}
 

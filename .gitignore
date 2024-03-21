@@ -145,3 +145,4 @@ supabase/
 log.json
 dump.rdb
 .vscode
+listingIDs.json

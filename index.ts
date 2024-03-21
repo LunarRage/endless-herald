@@ -21,7 +21,7 @@ async function setup(){
                 client.on(event, handler);
             } 
         }   
-
+        
         client.login(process.env.DISCORD_TOKEN);
         endlessLogger.info('Bot is logging in');
     } catch (error) {

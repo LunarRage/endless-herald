@@ -1,12 +1,12 @@
 import endlessLogger from "../lib/logger";
-import { ApiResponse, LandData, landQuery} from "../types/index";
+import { LandAPIResponse, landQuery} from "../types/index";
 
 const baseURL = `https://land-delegate-api.axieinfinity.com/land/v1/public/contract/marketplace`;
 
 
 //?page=1&limit=20&order=created_at&sort=desc
 
-export async function getLandDelegationOrders(baseURL:string, query:landQuery):Promise<ApiResponse<LandData>>{
+export async function getLandDelegationOrders(baseURL:string, query:landQuery):Promise<LandAPIResponse>{
 
     const queryString = Object.entries(query).reduce((acc, [key, value]) => {
         acc.set(key, value.toString());
@@ -20,23 +20,18 @@ export async function getLandDelegationOrders(baseURL:string, query:landQuery):P
         if(!response.ok){
             return {
                 data:null,
-                error:{
-                    message:`Unable to fetch land data: ${response.statusText}`,
-                    code:response.status
-                }
+                total:0
             }
         }
 
-        const data:LandData = await response.json() as LandData;
+        let jsonData = await response.json() as LandAPIResponse;
 
-        return { data, error:null }
+        return jsonData;
     } catch (error) {
         endlessLogger.info(error,`Error fetching land data`);
         return {
             data:null,
-            error:{
-                message: error instanceof Error ?error.message: 'An unknown error occurred',
-            }
+            total:0
         }
     }
 }

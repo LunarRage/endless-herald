@@ -1,13 +1,12 @@
 {
   "name": "src",
   "version": "1.0.0",
-  "description": "Discord bot for broadcasting land delegations",  
+  "description": "Discord bot for broadcasting land delegations",
   "main": "index.ts",
   "private": true,
   "author": "Alec Kerr <alec@axieinfinity.com>",
   "license": "ISC",
   "homepage": "https://github.com/LunarRage/endless-herald",
-
   "scripts": {
     "dev": "nodemon index.ts",
     "start": "ts-node index.ts",
@@ -21,6 +20,7 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
+    "node-cron": "^3.0.3",
     "nodemon": "^3.1.0",
     "pino": "^8.19.0",
     "pino-pretty": "^10.3.1",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.27",
+    "@types/node-cron": "^3.0.11",
     "@types/redis": "^4.0.11",
     "ts-node": "^10.9.2"
   }
