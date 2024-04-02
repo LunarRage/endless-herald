@@ -13,7 +13,8 @@ import { broadcastToAllGuilds } from '../actions/discord';
 
 const handleClientReady = async (client: Client) => {
     endlessLogger.info(`Bot is ready! Logged in as ${client.user?.tag}`);
-    cron.schedule('* * * * *', processBroadcastings);
+    //cron.schedule('* * * * *', processBroadcastings);
+    await processBroadcastings();
 };
 
 async function processBroadcastings(){

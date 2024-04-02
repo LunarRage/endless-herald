@@ -9,5 +9,5 @@ export type LandUserDetails ={
     userMarketAddress: string;
     userIconUrl: string;
     thumbNailImage: string;
-    majorImage: string;
+    majorImage?: string;
 }

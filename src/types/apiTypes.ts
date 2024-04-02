@@ -58,10 +58,10 @@ export type AvgEarning = {
 }
 
 export type Land = {
-    savanah: number;
-    forest: number;
-    arctic: number;
-    mystic: number;
-    genesis: number;
+    savanah?: number;
+    forest?: number;
+    arctic?: number;
+    mystic?: number;
+    genesis?: number;
     total: number;
 }
