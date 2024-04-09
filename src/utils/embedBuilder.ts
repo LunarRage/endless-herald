@@ -102,7 +102,7 @@ function buildUserIconUrl(landData:LandData):string{
 export function buildPlotDetails(landData: LandData, rns?:RoninUser):LandUserDetails{
     let landUserDetails: LandUserDetails = {
         labelColour: buildLabelColour(landData),
-        shortDescription: `User Split: ${landData.payment_model.partner} Owner Split: ${landData.payment_model.owner} `,
+        shortDescription: `Steward Split: ${landData.payment_model.partner}% Owner Split: ${landData.payment_model.owner}% `,
         listingUrl: `https://delegate.axieinfinity.com/contracts/${landData.id}`,
         description: `  <:AxieInfinityShard:768531431127253043> Potenital Daily Earnings: ${landData.avg_earning.token} AXS
             :stopwatch: Contract Period: ${landData.expiration/86400 === 1 ? landData.expiration/86400 +' day':landData.expiration/86400 + ' days'}

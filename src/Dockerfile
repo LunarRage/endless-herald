@@ -1,5 +1,5 @@
-# 1. Base Image Selection
-FROM node:20-slim
+# Runtime Stage
+FROM node:18
 
 # 2. Working Directory Creation
 WORKDIR /src
@@ -19,4 +19,4 @@ RUN mkdir -p ./app/logs
 ENV NODE_ENV=production
 
 # 6. Application Execution
-CMD ["node", "dist/index.js"]
+CMD ["node", "app/index.js"]
