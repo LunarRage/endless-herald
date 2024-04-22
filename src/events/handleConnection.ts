@@ -6,7 +6,7 @@ import { getRNSInstance } from '../lib/rns';
 import { addListing } from '../lib/redisClient';
 import cron from 'node-cron';
 import { buildListingEmbed } from '../utils';
-import prevBroadcast from '../lib/prevBroadcasted.json';
+import prevBroadcast from '../storage/prevBroadcasted.json';
 import { updateLastBroadcasted } from '../lib/fileSync';
 import { broadcastToAllGuilds } from '../actions/discord';
 

@@ -1,23 +1,31 @@
 version: '3.8'
-services:
-  bot:
-    build: .
-    env_file:
-      - .env
-    depends_on:
-      - redis
-    networks:
-      - listing-network
-    volumes:
-      - ./logs:/usr/src/app/logs
-
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    networks:
-      - listing-network
 
 networks:
   listing-network:
     driver: bridge
+
+services:
+  endless-0:
+    container_name: endless-herald
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/src/app/logs
+    restart: unless-stopped
+    networks:
+      - listing-network
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    container_name: endless-redis
+    ports:
+      - "6380:6379"
+    networks:
+      - listing-network
+    restart: unless-stopped
+
+

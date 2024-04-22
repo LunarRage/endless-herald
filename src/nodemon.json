@@ -1,5 +1,5 @@
 {
-  "ignore":["./lib/prevBroadcasted.json"],
+  "ignore":["./storage/prevBroadcasted.json"],
   "execMap": {
     "ts": "ts-node"
   }

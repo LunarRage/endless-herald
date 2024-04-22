@@ -3,12 +3,18 @@ import { LastBroadcasted } from "../types";
 import endlessLogger from "./logger";
 import path from "path";
 
-const FILEPATH = path.join(__dirname, 'prevBroadcasted.json');
+// Get the directory path of the current module
+const currentModuleDirectory = path.dirname(__filename);
+
+// Go up two levels to get to the correct directory
+const parentDirectory = path.dirname(currentModuleDirectory);
+
+ // Define the log directory within the current module's directory
+ const logDirectory = path.join(parentDirectory,'/storage/prevBroadcasted.json');
 
 export async function updateLastBroadcasted(prevBroadcast: LastBroadcasted): Promise<void> {
     try {
 
-        
         prevBroadcast.broadcasted = prevBroadcast.broadcasted.map(listing=>{
             if(typeof listing.created_at == 'string'){
                 listing.created_at = new Date(listing.created_at);
@@ -21,7 +27,7 @@ export async function updateLastBroadcasted(prevBroadcast: LastBroadcasted): Pro
         
         
         const jsonData = JSON.stringify(prevBroadcast, null, 2);
-        await writeFile(FILEPATH, jsonData, 'utf8');
+        await writeFile(logDirectory, jsonData, 'utf8');
         endlessLogger.info('Last Broadcasted updated');
 
     } catch (error) {

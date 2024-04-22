@@ -4,14 +4,17 @@ import endlessLogger from "../lib/logger";
 require('dotenv').config();
 
 //1169027735444787262
+const LISTIN_CHANNEL = `🎫｜delegation-listings`;
 
 export async function broadcastToAllGuilds(embeds:EmbedBuilder[]){
     let guilds = client.guilds.cache;
     let channels:TextChannel[] = [];
+
     guilds.forEach(guild=>{
-        let channel = guild.channels.cache.find(channel => channel.name === 'land-listings');
-        if(channel){
-            channels.push(channel as TextChannel);
+        let foundChannel = guild.channels.cache.find(channel => channel.name === LISTIN_CHANNEL);
+
+        if(foundChannel){
+            channels.push(foundChannel as TextChannel);
         }
     });
 
@@ -20,6 +23,11 @@ export async function broadcastToAllGuilds(embeds:EmbedBuilder[]){
         return;
 
     }
+
+    channels.map(channel=>{
+        endlessLogger.info(`Channel found: ${channel.name}`);
+    });
+    
     await broadcastEmbedsInSetsCron(channels,embeds);
 
 }

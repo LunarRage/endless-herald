@@ -7,7 +7,7 @@ WORKDIR /src
 # 3. Dependency Installation
 COPY package*.json ./
 COPY . .
-RUN npm install --only=production
+RUN npm install
 
 # 4. Application Building
 RUN npm run build
