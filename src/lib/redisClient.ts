@@ -28,13 +28,12 @@ export default initializeRedisClient;
 export async function addListing(key: string, value: LandData): Promise < boolean > {
     const redisClient = await initializeRedisClient;
 
-    //Check if key exist
-    const result = await redisClient.get(key);
-    if (result) {
-        return false;
+    try {
+        await redisClient.set(key, JSON.stringify(value));    
+    } catch (error) {
+        throw new Error(`Error adding listing: ${error}`);
     }
-
-    await redisClient.set(key, JSON.stringify(value));
+    
     return true;
 }
 
@@ -58,15 +57,15 @@ export async function findMatchingKeys(pattern: string): Promise < string[] > {
     return keys;
 }
 
-export async function getListing(key: string): Promise < LandData | null > {
+export async function isExistingListing(key: string): Promise <boolean> {
     const redisClient = await initializeRedisClient;
-    const resultListing = await redisClient.get(key);
+    const resultListing = await redisClient.exists(key);
 
 
-    if (resultListing) {
-        return JSON.parse(resultListing);
+    if (resultListing >= 1) {
+        return true;
     } else {
-        return null;
+        return false;
     }
 
 }

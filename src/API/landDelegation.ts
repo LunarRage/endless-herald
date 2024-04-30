@@ -1,9 +1,6 @@
 import endlessLogger from "../lib/logger";
 import { LandAPIResponse, landQuery} from "../types/index";
 
-const baseURL = `https://land-delegate-api.axieinfinity.com/land/v1/public/contract/marketplace`;
-
-
 //?page=1&limit=20&order=created_at&sort=desc
 
 export async function getLandDelegationOrders(baseURL:string, query:landQuery):Promise<LandAPIResponse>{

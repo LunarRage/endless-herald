@@ -4,11 +4,13 @@ networks:
   listing-network:
     driver: bridge
 
+volumes:
+  redis-data:  # Define the volume named redis-data
+
 services:
   endless-0:
     container_name: endless-herald
-    build:
-      context: .
+    image: endless-reminder
     env_file:
       - .env
     volumes:
@@ -17,13 +19,16 @@ services:
     networks:
       - listing-network
     depends_on:
-      - redis
+      - redis-0
 
-  redis:
+  redis-0:
     image: redis
     container_name: endless-redis
+    volumes:
+      - ./redis-data:/data  # Mount the volume at /data inside the container
     ports:
       - "6380:6379"
+    command: redis-server --save 300 1
     networks:
       - listing-network
     restart: unless-stopped

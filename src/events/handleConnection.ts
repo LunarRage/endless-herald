@@ -1,20 +1,17 @@
 import { Client, EmbedBuilder} from 'discord.js';
 import endlessLogger from '../lib/logger';
-import { Land, LandData, LastBroadcasted, RoninUser, landQuery } from '../types/apiTypes';
+import { Land, LandData, RoninUser, landQuery } from '../types/apiTypes';
 import { getLandDelegationOrders } from '../API/landDelegation';
 import { getRNSInstance } from '../lib/rns';
-import { addListing } from '../lib/redisClient';
+import { addListing, isExistingListing } from '../lib/redisClient';
 import cron from 'node-cron';
 import { buildListingEmbed } from '../utils';
-import prevBroadcast from '../storage/prevBroadcasted.json';
-import { updateLastBroadcasted } from '../lib/fileSync';
 import { broadcastToAllGuilds } from '../actions/discord';
 
 
 const handleClientReady = async (client: Client) => {
     endlessLogger.info(`Bot is ready! Logged in as ${client.user?.tag}`);
-    //cron.schedule('* * * * *', processBroadcastings);
-    await processBroadcastings();
+    cron.schedule('* * * * *', processBroadcastings);
 };
 
 async function processBroadcastings(){
@@ -42,37 +39,30 @@ async function processBroadcastings(){
 }
 
 async function updateRedisCache(listings:LandData[]):Promise<LandData[]>{
-    
-    const lastBroadcasted: LastBroadcasted = prevBroadcast;
 
-    // Add the listings to the cache
-    let potentialNewListings = (await Promise.all(listings.map(async (listing)=>{
-         let isNew = await addListing(listing.id, listing);
-         if(isNew){
+    try {
+        let newListings = (await Promise.all(listings.map(async (listing)=>{
+            let isNewListing = await isExistingListing(listing.id);
+            
+            if(!isNewListing){
+                await addListing(listing.id, listing);
                 return listing;
-         }
-         return null;
-    }))).filter(listing=>listing) as LandData[];
+            }
+            
+            return null;
+        }))).filter(listing=>listing) as LandData[];
 
-    let newListings = potentialNewListings.filter(listing=>{
-        return !lastBroadcasted.broadcasted.some(broadcasted=>{
-            return broadcasted.id == listing.id;
-        });
-    });
+        if(newListings.length > 0){
+            endlessLogger.info(`Broadcasted ${newListings.length} new listings`);
+        }
+
+        return newListings;
 
 
-    let newBroadCastedListings = newListings.map(listing=>{
-        return {id: listing.id, created_at: new Date()};
-    });
-
-    lastBroadcasted.broadcasted = [...lastBroadcasted.broadcasted, ...newBroadCastedListings]; 
-    
-    if(newListings.length > 0){
-        await updateLastBroadcasted(lastBroadcasted);
-        endlessLogger.info(`Broadcasted ${newListings.length} new listings`);
+    } catch (error) {
+        endlessLogger.error(error, `Error updating Redis cache`);
+        return [];
     }
-    
-    return newListings;
 }
 
 async function formatEmbedListings(listings:LandData[]):Promise<EmbedBuilder[]>{

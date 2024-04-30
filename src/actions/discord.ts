@@ -3,15 +3,16 @@ import { client } from "../index";
 import endlessLogger from "../lib/logger";
 require('dotenv').config();
 
-//1169027735444787262
-const LISTIN_CHANNEL = `🎫｜delegation-listings`;
+const MAIN_CHANNEL = `🎫｜delegation-listings`;
+const TESTING_CHANNEL = `test-delegation-listings`;
 
 export async function broadcastToAllGuilds(embeds:EmbedBuilder[]){
     let guilds = client.guilds.cache;
     let channels:TextChannel[] = [];
+    let listing_channel = process.env.node_env === 'production' ? MAIN_CHANNEL : TESTING_CHANNEL;
 
     guilds.forEach(guild=>{
-        let foundChannel = guild.channels.cache.find(channel => channel.name === LISTIN_CHANNEL);
+        let foundChannel = guild.channels.cache.find(channel => channel.name === listing_channel);
 
         if(foundChannel){
             channels.push(foundChannel as TextChannel);
