@@ -19,3 +19,4 @@ vscode:
     - eamodio.gitlens
     - GitHub.copilot
     - joshbolduc.commitlint
+    - ritwickdey.LiveServer

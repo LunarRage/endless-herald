@@ -7,11 +7,13 @@ import { addListing, isExistingListing } from '../lib/redisClient';
 import cron from 'node-cron';
 import { buildListingEmbed } from '../utils';
 import { broadcastToAllGuilds } from '../actions/discord';
+require('dotenv').config();
 
 
 const handleClientReady = async (client: Client) => {
     endlessLogger.info(`Bot is ready! Logged in as ${client.user?.tag}`);
-    cron.schedule('* * * * *', processBroadcastings);
+    let cronJobString = process.env.POLLING_INTERVAL ?? '* * * * *';
+    cron.schedule(cronJobString, processBroadcastings);
 };
 
 async function processBroadcastings(){

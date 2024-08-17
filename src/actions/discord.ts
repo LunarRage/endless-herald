@@ -9,7 +9,12 @@ const TESTING_CHANNEL = `test-delegation-listings`;
 export async function broadcastToAllGuilds(embeds:EmbedBuilder[]){
     let guilds = client.guilds.cache;
     let channels:TextChannel[] = [];
-    let listing_channel = process.env.node_env === 'production' ? MAIN_CHANNEL : TESTING_CHANNEL;
+    let listing_channel = process.env.CHANNEL_NAME;
+
+    if(listing_channel === undefined){
+        endlessLogger.error('Channel name not found');
+        return;
+    }
 
     guilds.forEach(guild=>{
         let foundChannel = guild.channels.cache.find(channel => channel.name === listing_channel);

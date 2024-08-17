@@ -3,14 +3,29 @@ import eventHandlers from './events/index';
 import endlessLogger from './lib/logger';
 
 
+/**
+ * Main client instance of the Discord bot.
+ * The client is responsible for handling interactions with the Discord API.
+ *
+ * @type {Client}
+ * @memberof DiscordBot
+ */
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMessages],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
     partials: [Partials.Message]
 });
 
-
-
-async function setup(){
+/**
+ * Asynchronously sets up the bot by loading environment variables,
+ * registering event handlers, and logging into Discord.
+ * 
+ * @async
+ * @function setup
+ * @memberof DiscordBot
+ * @returns {Promise<void>} - A promise that resolves when the bot is successfully set up.
+ * @throws Will throw an error if there's an issue in the setup process.
+ */
+async function setup(): Promise<void> {
 
     try {
         const dotenv = await import('dotenv');
@@ -31,7 +46,17 @@ async function setup(){
     
 }
 
+/**
+ * Initiates the setup process for the Discord bot.
+ * 
+ * @memberof DiscordBot
+ */
 setup();
 
-
-export {client};
+/**
+ * Exporting the client for external usage, such as for testing or additional event handling.
+ * 
+ * @type {Client}
+ * @memberof DiscordBot
+ */
+export { client };

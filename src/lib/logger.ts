@@ -5,7 +5,9 @@ require('dotenv').config();
 
 
 
-
+/**
+ * This comment _supports_ [Markdown](https://www.markdownguide.org/)
+ */
 function setup():Logger{
     try {
         let logger: Logger;
